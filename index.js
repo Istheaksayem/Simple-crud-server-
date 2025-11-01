@@ -42,6 +42,17 @@ async function run() {
             res.send(result)
         })
 
+        app.get('/users/:id', async(req, res) => {
+            const id =req.params.id;
+            console.log('need user id',id)
+            const query ={_id:new ObjectId(id)}
+            const result =await userCollection.findOne(query)
+            res.send(result)
+
+
+        })
+
+
         // add database related apis here
         app.post('/users', async (req, res) => {
             const newUser = req.body;
@@ -51,12 +62,12 @@ async function run() {
             res.send(result)
         })
 
-        app.delete('/users/:id', async(req, res) => {
+        app.delete('/users/:id', async (req, res) => {
             console.log(req.params.id);
             const id = req.params.id
             const query = { _id: new ObjectId(id) }
-            const result =await userCollection.deleteOne(query)
-            console.log( "dghj",result,)
+            const result = await userCollection.deleteOne(query)
+            console.log("dghj", result,)
             res.send(result)
         })
 
